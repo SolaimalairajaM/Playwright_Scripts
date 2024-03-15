@@ -1,0 +1,18 @@
+How to record test - Test Generator
+Playwright comes with a tool - Codegen also called Test Generator
+Can be used to record test and generate test scripts
+It Opens 2 windows
+A browser window to interacts with the website
+Playwright Inspector window to record test
+
+Step 1 - Open terminal and run codegen   npx playwright codegen
+Step 2 - Check 2 windows open - Browser and Playwright Inspector
+Step 3 - Record your test steps and check the test scripts getting created
+Step 4 - Save the recorded script in a test file | Run and check
+
+Can also add the url npx playwright codegen google.com
+See all options  npx playwright codegen --help
+Record on a specific browser (default:chromium) npx playwright codegen --browser firefox
+Record and save to a file  npx playwright codegen --target javascript -o record_example.js
+Set viewport - screen resolution (size)  npx playwright codegen --viewport-size=800,600
+Emulate devices  npx playwright codegen --device="iPhone 11"

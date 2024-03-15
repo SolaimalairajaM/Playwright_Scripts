@@ -1,0 +1,25 @@
+Selectors are the strings/properties of the web objects
+Selectors are used to create Locators
+Selectors e.g. CSS, Class, Name, ID, Text, XPath …
+
+To find an object or element we use the syntax  page.locator(selector[, options])
+Locator is a class in Playwright library
+
+await page.goto('https://www.saucedemo.com/');
+
+using any object property
+await page.click('id=user-name')
+await page.locator('[id="user-name"]').click();
+await page.locator('id=user-name').fill(Graham)     // or
+await page.locator('[id="user-name"]').fill(Einstein)
+
+using CSS selector
+await page.locator('#login-button').click()
+
+using XPath
+await page.locator('xpath=//input[@name="login-button"]').click()
+await page.locator('//input[@name="login-button"]').click()
+
+using Text
+await page.locator('text=LOGIN').click();
+await page.locator('input:has-text("LOGIN")').click()

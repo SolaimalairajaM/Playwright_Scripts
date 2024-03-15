@@ -1,0 +1,41 @@
+How to use Trace Viewer
+Step 1 - Open config file and set  trace: 'on-first-retry'
+It means - Collect trace when retrying the failed test for the 1st time only
+Step 2 - Save and Run a test to fail 
+Step 3 - Check trace.zip file created under test-results folder
+Step 4 - View trace - npx playwright show-trace trace.zip
+
+Trace Viewer Options
+'on-first-retry'    - Record a trace only when retrying a test for the first time.
+'off'               - Do not record a trace.
+'on'                - Record a trace for each test. (not recommended as it's performance heavy)
+'retain-on-failure' - Record a trace for each test, but remove it from successful test runs
+
+To set trace on from command   npx playwright test --trace on
+
+Different ways to view trace
+Using command - npx playwright show-trace trace.zip
+Using HTML Report
+Using utility - https://trace.playwright.dev/
+
+Set Tracing programmatically
+
+test.only('test demo', async ({ page, context }) =＞ {
+ await context.tracing.start({snapshots: true, screenshots: true})
+ // test code
+ await context.tracing.stop({path: 'test-trace.zip'});
+});
+
+
+==============================================================================
+let context
+let page
+test.beforeAll(async ({ browser }) =＞ {
+ context = await browser.newContext()
+ await context.tracing.start({ screenshots: true, snapshots: true })
+ page = await context.newPage()
+})
+
+test.afterAll(async () =＞ {
+ await context.tracing.stop({ path: 'test-trace.zip' });
+})

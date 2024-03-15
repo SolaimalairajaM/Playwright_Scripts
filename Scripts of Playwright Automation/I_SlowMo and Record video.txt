@@ -1,0 +1,57 @@
+How to run tests in Slow Motion | How to Record Video
+Step 1 - Open config file and add option for slow motion and video recording
+
+const config = {
+use: {
+   video: 'on',
+   launchOptions:{
+     slowMo: 1000
+   }
+
+slowMo slows down Playwright operations by the specified milliseconds
+
+video: 
+'on' - Record video for each test
+'off' - Do not record video
+'retain-on-failure' - Record for each test, but remove from successful test runs
+'on-first-retry' - Record only when retrying a test for the first time
+
+Step 2 - Save & Run
+Step 3 - Check Video files will appear in the test-results folder
+
+Note - SlowMo is a field in Class BrowserType.LaunchOptions
+
+================================================================================
+
+How to set video recording and slow motion from test (Browser Context)
+In Playwright we can create isolated incognito browser sessions using browser context
+
+Create a new test
+// Launch browser
+const browser = await chromium.launch();
+// Create a new incognito browser context
+const context = await browser.newContext();
+// Create a new page inside context.
+const page = await context.newPage();
+await page.goto('https://example.com');
+// Dispose context once it's no longer needed.
+await context.close();
+
+Set configurations for slow motion and video recording at test level
+Step 1 - Create a test and create browser context
+Step 2 - Add options for Slow Motion in browser
+Step 3 - Add options for video recording in new context
+Step 4 - Close context
+
+// launch browser
+const browser = await chromium.launch({
+   headless: false,
+   slowMo: 1000
+})
+// create a context for browser
+const context = await browser.newContext({
+   recordVideo: {
+       dir: 'videos/',
+       size: {width:800, height: 600}
+   }
+})
